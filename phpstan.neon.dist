@@ -1,0 +1,20 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/phpstan/phpstan-strict-rules/rules.neon
+
+services:
+    -
+        class: Vural\LarastanStrictRules\Rules\NoValidationInControllerRule
+        tags:
+            - phpstan.rules.rule
+parameters:
+
+    paths:
+        - app
+        - database
+        - config
+        - routes
+
+    # The level 9 is the highest level
+    level: 9
+    reportMaybesInPropertyPhpDocTypes: false
