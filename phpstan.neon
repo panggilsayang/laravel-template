@@ -1,0 +1,36 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+services:
+-
+    class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
+    arguments:
+        allowedFunctions:
+            - app
+            - event
+-
+    class: Vural\LarastanStrictRules\Rules\NoValidationInControllerRule
+    tags:
+        - phpstan.rules.rule
+
+parameters:
+
+    paths:
+        - app/
+        - database/
+        - routes/
+        - tests/
+
+    # Level 9 is the highest level
+    level: max
+
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+
+    excludePaths:
+        # we just exclude vendor code
+        - routes/console.php
+
+    checkMissingIterableValueType: false
+
+    reportUnmatchedIgnoredErrors: false
